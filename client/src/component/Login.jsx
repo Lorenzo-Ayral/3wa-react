@@ -1,13 +1,13 @@
 import React, {useState} from 'react'
 import './Login.css';
+import axios from 'axios';
 
 const Login = ( { checkIsLogged }) => {
 
-    // On créé un state pour le joueur
-    const [player, setPlayer] = useState({
-        firstname:'',
-        lastname:'',
-        email:''
+    // On créé un state pour le user
+    const [user, setUser] = useState({
+        email:'',
+        password:'',
     })
 
     // On créé un tableau d'erreurs
@@ -20,42 +20,43 @@ const Login = ( { checkIsLogged }) => {
     const handleInputChange = (event) => {
         const {value, name} = event.target
 
-        const updatePlayer = {
-            ...player,
+        const updateUser = {
+            ...user,
             [name]: value
         }
 
-        setPlayer(updatePlayer)
+        setUser(updateUser)
     }
 
 
     // À la soumission du formulaire, on stoppe le comportement par défaut du navigateur (recharegment)
     const onSubmitForm = (e) => {
         e.preventDefault();
-        console.log(player)
+        console.log(user)
 
         // Création d'un tableau d'erreurs
         const updateErrors = [];
 
         // On vérifie que la longueur de la chaîne de caractères une fois les espaces vides retirés sont égaux à zéro alors on ajoute une erreur dans le tableau.
-        if(player.firstname.trim().length === 0)
-        {
-            updateErrors.push('Le prénom est vide');
-        }
-
-        if(player.lastname.trim().length ===0)
-        {
-            updateErrors.push('Le nom est vide');
-        }
-
-        if(player.email.trim().length ===0)
+        if(user.email.trim().length ===0)
         {
             updateErrors.push('L\'email est vide');
         }
 
-        // Si le tableau d'erreurs est vide, alors on met l'utilisateur connecté à true, et on renvoie la même information au composant parent.
-        if(updateErrors.length === 0)
+        if(user.password.trim().length ===0)
         {
+            updateErrors.push('Le mot de passe est vide');
+        }
+
+        // Si le tableau d'erreurs est vide, alors on met l'utilisateur connecté à true, et on renvoie la même information au composant parent.
+        if(updateErrors.length === 0) {
+            axios.post("http://localhost:9000/api/login", {
+                email: user.email,
+                password: user.password
+            })
+                .then(res => console.log(res))
+                .catch(err => console.log(err));
+
             setIsLogged(true);
             checkIsLogged(true);
         }
@@ -69,19 +70,15 @@ const Login = ( { checkIsLogged }) => {
     }
     return (
         <>
-            <h3 className="Login-title">Jouer à Snake</h3>
+            <h3 className="Login-title">Connexion</h3>
             <form onSubmit={onSubmitForm} className="Form">
-                <div className="Form-component">   
-                    <label htmlFor="firstname">Prénom:</label>
-                    <input type="text" name="firstname" value={player.firstname} onChange={handleInputChange}/>
-                </div>
-                <div className="Form-component">                       
-                    <label htmlFor="lastname">Nom:</label>
-                    <input type="text" name="lastname" value={player.lastname} onChange={handleInputChange}/>
-                </div>
                 <div className="Form-component">
                     <label htmlFor="email">Email:</label>
-                    <input type="email" name="email" value={player.email} onChange={handleInputChange}/>
+                    <input type="email" name="email" value={user.email} onChange={handleInputChange}/>
+                </div>
+                <div className="Form-component">
+                    <label htmlFor="password">Mot de passe:</label>
+                    <input type="password" name="password" value={user.password} onChange={handleInputChange}/>
                 </div>
                 <input type="submit" value="Jouer" />
             </form>
