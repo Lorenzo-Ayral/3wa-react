@@ -228,7 +228,7 @@ Bon courage 🙂
 - cd server-json
 - npm run api
 
-## Github 
+## Github
 
 - git status : permet de visualiser quel est l'état du repository.
 - git add fichiers repertoires : permet d'indiquer que ces fichiers/répertoires doivent être ajouter au repository.
