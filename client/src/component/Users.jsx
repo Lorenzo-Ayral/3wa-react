@@ -5,7 +5,7 @@ function Users() {
     const [post, setPost] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:9000/3wa-react/server-json/data/collaborateurs.json").then((response) => {
+        axios.get("../3wa-react/server-json/data/collaborateurs.json").then((response) => {
             console.log(data);
             setPost(data?.data);
         });
