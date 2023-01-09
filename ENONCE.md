@@ -159,7 +159,7 @@ Vous organiserez vos dossiers selon l'architecture suivante :
 └── src/
     ├── views       # les composants de page
     ├── components  # les composants d'affichage (card, forms, …)
-    ├── services    # les services JS (axios, localStorage)
+    ├── services    # les services JS (services, localStorage)
     └── features    # les features Redux Toolkit
 ```
 
