@@ -5,10 +5,12 @@ function Users() {
     const [post, setPost] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:9000/3wa-react/server-json/data/collaborateurs.json").then((response) => {
-            console.log(data);
-            setPost(data?.data);
-        });
+        let token = localStorage.getItem('token');
+        axios.post("http://localhost:9000/api/collaborateurs", {
+            authorization: localStorage.getItem('token'),
+        })
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
     }, []);
 
     return (
