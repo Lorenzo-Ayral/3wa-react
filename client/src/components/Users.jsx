@@ -16,8 +16,10 @@ function Users() {
             .catch(err => console.log(err));
     }, []);*/
 
+getRandomCollaborator().then(data=>{
 
-console.log(getRandomCollaborator());
+    console.log(data.data.firstname);
+})
 
 
     const token = useSelector((state) => state.token);
