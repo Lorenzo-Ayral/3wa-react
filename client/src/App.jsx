@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import Login from "./components/Login";
+import Users from './components/Users';
 import Home from './views/home';
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
     <div className="App">
       
       {/* Si accessToGame est à true alors on affiche le Canvas, sinon on laisse le formulaire de Login affiché. */}
-      {accessToGame ? <Home/>  : <Login checkIsLogged={verifyIsLogged}/>}
+      {accessToGame ? <Users/>  : <Login checkIsLogged={verifyIsLogged}/>}
       
     </div>
   )
