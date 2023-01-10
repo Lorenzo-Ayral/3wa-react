@@ -54,11 +54,11 @@ const Login = ( { checkIsLogged }) => {
                 email: user.email,
                 password: user.password
             })
-                .then(res => console.log(res))
+                .then(res => localStorage.setItem("token", res.data.token))
                 .catch(err => console.log(err));
 
-            setIsLogged(true);
-            checkIsLogged(true);
+            // setIsLogged(true);
+            // checkIsLogged(true);
         }
         else
         {
