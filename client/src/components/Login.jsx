@@ -1,13 +1,18 @@
 import React, {useState} from 'react'
 import './Login.css';
 import axios from 'axios';
+import {useDispatch} from 'react-redux';
+import {setToken} from '../features/token.jsx'
+import {useSelector} from "react-redux";
 
-const Login = ( { checkIsLogged }) => {
+const Login = ({checkIsLogged}) => {
+
+    const dispatch = useDispatch();
 
     // On créé un state pour le user
     const [user, setUser] = useState({
-        email:'',
-        password:'',
+        email: '',
+        password: '',
     })
 
     // On créé un tableau d'erreurs
@@ -54,23 +59,26 @@ const Login = ( { checkIsLogged }) => {
                 email: user.email,
                 password: user.password
             })
-                .then(res => localStorage.setItem("token", res.data.token))
+                .then(res => {
+                    localStorage.setItem("token", res.data.token);
+                    dispatch(setToken(res.data.token));
+                    setIsLogged(true);
+                    checkIsLogged(true);
+                })
                 .catch(err => console.log(err));
 
-            // setIsLogged(true);
-            // checkIsLogged(true);
-        }
-        else
-        {
+        } else {
             // Sinon, on met à jour le tableau d'erreurs.
             setErrors(updateErrors);
         }
 
 
     }
+    const token = useSelector((state) => state.token);
     return (
         <>
             <h3 className="Login-title">Connexion</h3>
+            <pre>{JSON.stringify(token)}</pre>
             <form onSubmit={onSubmitForm} className="Form">
                 <div className="Form-component">
                     <label htmlFor="email">Email:</label>
@@ -80,12 +88,12 @@ const Login = ( { checkIsLogged }) => {
                     <label htmlFor="password">Mot de passe:</label>
                     <input type="password" name="password" value={user.password} onChange={handleInputChange}/>
                 </div>
-                <input type="submit" value="Jouer" />
+                <input type="submit" value="Jouer"/>
             </form>
             {/* On mappe le tableau d'erreur s'il y en a. */}
             {errors.length > 0 ?
                 <div>
-                    { errors.map( (error, i) => <p key={i}>{ error }</p> ) }
+                    {errors.map((error, i) => <p key={i}>{error}</p>)}
                 </div>
                 : null}
         </>
