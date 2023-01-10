@@ -1,8 +1,13 @@
 import React, {useState} from 'react'
 import './Login.css';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { setToken } from '../features/token.jsx'
+import { useSelector} from "react-redux";
 
 const Login = ( { checkIsLogged }) => {
+
+    const dispatch = useDispatch();
 
     // On créé un state pour le user
     const [user, setUser] = useState({
@@ -54,11 +59,14 @@ const Login = ( { checkIsLogged }) => {
                 email: user.email,
                 password: user.password
             })
-                .then(res => localStorage.setItem("token", res.data.token))
+                .then(res => {
+                    localStorage.setItem("token", res.data.token);
+                    dispatch(setToken(res.data.token));
+                    setIsLogged(true);
+                    checkIsLogged(true);
+                })
                 .catch(err => console.log(err));
 
-            setIsLogged(true);
-            checkIsLogged(true);
         }
         else
         {
@@ -68,9 +76,11 @@ const Login = ( { checkIsLogged }) => {
 
 
     }
+    const token = useSelector((state) => state.token);
     return (
         <>
             <h3 className="Login-title">Connexion</h3>
+            <pre>{JSON.stringify(token)}</pre>
             <form onSubmit={onSubmitForm} className="Form">
                 <div className="Form-component">
                     <label htmlFor="email">Email:</label>
