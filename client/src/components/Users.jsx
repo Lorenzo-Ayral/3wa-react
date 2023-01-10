@@ -6,20 +6,15 @@ import {getAllCollaborators} from "../services/allCollaborator.js";
 import {getRandomCollaborator} from "../services/randomCollaborator.js";
 function Users() {
     const [post, setPost] = useState([]);
+    const [randomFirstname, setRandomFirstname] = useState([]);
 
-/*    useEffect(() => {
-        let token = localStorage.getItem('token');
-        axios.post("http://localhost:9000/api/collaborateurs", {
-            authorization: localStorage.getItem('token'),
+console.log(getRandomCollaborator())
+    useEffect(()=>{
+        getRandomCollaborator().then(data=>{
+            setRandomFirstname(data.data.firstname)
         })
-            .then(res => console.log(res))
-            .catch(err => console.log(err));
-    }, []);*/
+    })
 
-getRandomCollaborator().then(data=>{
-
-    console.log(data.data.firstname);
-})
 
 
     const token = useSelector((state) => state.token);
@@ -27,17 +22,8 @@ getRandomCollaborator().then(data=>{
         <div>
             <button onClick={() => clearToken}/>
             <pre>{JSON.stringify(token)}</pre>
-            Users
-            {post.map((item, i) => {
-                return (
-                    <div key={i}>
-                        <p>{getRandomCollaborator?.firstname}</p>
-                        <p>{item?.lastname}</p>
-                        <p>{item?.email}</p>
-                    </div>
-
-                );
-            })}
+            <h1>Users</h1>
+            <p>{randomFirstname}</p>
         </div>
     );
 }
