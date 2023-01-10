@@ -17,7 +17,6 @@ function Users() {
                 setPost(response?.data);
             });
     }, []);
-
     return (
         <div>
             Users
