@@ -1,16 +1,10 @@
 import { useState } from 'react';
 import {Provider} from 'react-redux';
 import './App.css'
-<<<<<<< HEAD
-import Login from "./component/Login";
-import Users from "./component/Users.jsx";
-import store from './store/index.js';
-=======
 import Login from "./components/Login";
 import Users from "./components/Users.jsx";
 import store from './store/index.js';
 
->>>>>>> branch-marty
 
 function App() {
     const [count, setCount] = useState(0)

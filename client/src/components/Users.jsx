@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-<<<<<<< HEAD:client/src/component/Users.jsx
 import axios from "axios";
 import {clearToken} from "../features/token.js";
 import {useSelector} from "react-redux";
@@ -17,6 +16,10 @@ function Users() {
             .catch(err => console.log(err));
     }, []);*/
 
+
+console.log(getRandomCollaborator());
+
+
     const token = useSelector((state) => state.token);
     return (
         <div>
@@ -33,30 +36,8 @@ function Users() {
 
                 );
             })}
-=======
-// import axios from "axios";
-import getRandomCollaborator from "./random";
-
-
-function Users() {
-    
-
-    
-
-
-console.log(getRandomCollaborator());
-
-    return (
-        <div>
-            <h2>User</h2>
-            
->>>>>>> branch-marty:client/src/components/Users.jsx
         </div>
     );
 }
 
-<<<<<<< HEAD:client/src/component/Users.jsx
 export default Users;
-=======
-export default Users;
->>>>>>> branch-marty:client/src/components/Users.jsx

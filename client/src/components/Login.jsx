@@ -2,11 +2,7 @@ import React, {useState} from 'react'
 import './Login.css';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-<<<<<<< HEAD:client/src/component/Login.jsx
-import { setToken } from '../features/token.js'
-=======
 import { setToken } from '../features/token.jsx'
->>>>>>> branch-marty:client/src/components/Login.jsx
 import { useSelector} from "react-redux";
 
 const Login = ( { checkIsLogged }) => {
