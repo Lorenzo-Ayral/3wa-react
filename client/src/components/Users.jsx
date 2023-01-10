@@ -4,23 +4,29 @@ import {clearToken} from "../features/token.js";
 import {useSelector} from "react-redux";
 import {getAllCollaborators} from "../services/allCollaborator.js";
 import {getRandomCollaborator} from "../services/randomCollaborator.js";
-
 function Users() {
-    const [post, setPost] = useState([]);
+    const [randomPhoto, setRandomPhoto] = useState([]);
+    const [randomFirstname, setRandomFirstname] = useState([]);
+    const [randomSecondname, setRandomSecondname] = useState([]);
+    const [age, setAge] = useState(null);
+    const [city, setCity] = useState("");
 
-    /*    useEffect(() => {
-            let token = localStorage.getItem('token');
-            axios.post("http://localhost:9000/api/collaborateurs", {
-                authorization: localStorage.getItem('token'),
-            })
-                .then(res => console.log(res))
-                .catch(err => console.log(err));
-        }, []);*/
+    function calculateAge(birthdate) {
+        var birthdate = new Date(birthdate);
+        var ageDifMs = Date.now() - birthdate.getTime();
+        var ageDate = new Date(ageDifMs);
+        return Math.abs(ageDate.getUTCFullYear() - 1970);
+    }
 
-    getRandomCollaborator().then(data => {
-
-        console.log(data.data.firstname);
-    })
+    useEffect(() => {
+        getRandomCollaborator().then(data => {
+            setRandomPhoto(data.data.photo)
+            setRandomFirstname(data.data.firstname)
+            setRandomSecondname(data.data.lastname)
+            setAge(calculateAge(data.data.birthdate))
+            setCity(data.data.city)
+        })
+    }, [])
 
 
     const token = useSelector((state) => state.token);
@@ -28,17 +34,10 @@ function Users() {
         <div>
             <button onClick={() => clearToken}/>
             <pre>{JSON.stringify(token)}</pre>
-            Users
-            {post.map((item, i) => {
-                return (
-                    <div key={i}>
-                        <p>{getRandomCollaborator?.firstname}</p>
-                        <p>{item?.lastname}</p>
-                        <p>{item?.email}</p>
-                    </div>
-
-                );
-            })}
+            <h1>Users</h1>
+            <img src={randomPhoto}></img>
+            <p>{randomFirstname}, {randomSecondname}, {age} ans</p>
+            <p>{city}</p>
         </div>
     );
 }
