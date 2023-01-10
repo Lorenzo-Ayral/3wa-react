@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import {Provider} from 'react-redux';
 import './App.css'
-import Login from "./component/Login";
-import Users from "./component/Users.jsx";
+import Login from "./components/Login";
+import Users from "./components/Users.jsx";
 import store from './store/index.js';
+
 
 function App() {
     const [count, setCount] = useState(0)
@@ -22,9 +23,9 @@ function App() {
         <Provider store={store}>
             <div className="App">
 
-                {/* Si accessToGame est à true alors on affiche le Canvas, sinon on laisse le formulaire de Login affiché. */}
-                {accessToGame ? <Users/>  : <Login checkIsLogged={verifyIsLogged}/>}
-
+                {/* Si accessToGame est à true alors on affiche le Canvas, sinon on laisse le formulaire de Login affiché.
+                {accessToGame ? <Users/>  : <Login checkIsLogged={verifyIsLogged}/>} */}
+                <Users/>
             </div>
         </Provider>
     )

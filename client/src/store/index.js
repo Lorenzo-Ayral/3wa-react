@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import tokenReducer from '../features/token.js';
+import tokenReducer from '../features/token.jsx';
 
 const store = configureStore({
     reducer: {
