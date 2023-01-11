@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {clearToken} from "../features/token.js";
+import {clearToken} from "../features/token.jsx";
 import {useSelector} from "react-redux";
 import {getAllCollaborators} from "../services/allCollaborator.js";
 import {getRandomCollaborator} from "../services/randomCollaborator.js";
