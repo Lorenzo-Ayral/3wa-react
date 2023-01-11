@@ -4,8 +4,6 @@ import axios from 'axios';
 import {useDispatch} from 'react-redux';
 import {setToken} from '../features/token.jsx'
 import {useSelector} from "react-redux";
-import {Route} from "react-router-dom";
-import Card from "./Card.jsx";
 
 const Login = ({checkIsLogged}) => {
 

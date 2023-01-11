@@ -1,15 +1,38 @@
 import React, {useEffect, useState} from "react";
-import {useSelector} from "react-redux";
 import {getAllCollaborators} from "../services/allCollaborator.js";
+import SearchBar from "./SearchBar.jsx";
 
 function Users() {
     const [users, setUsers] = useState([]);
+    const [userSearch, setUserSearch] = useState('');
+    const [filteredUsers, setFilteredUsers] = useState(users);
+
+    const searchHandler = e => {
+        setUserSearch(e.target.value);
+        const searchResults = users.filter(user =>
+            user.firstname.toLowerCase().includes(e.target.value.toLowerCase())
+        );
+        setFilteredUsers(searchResults);
+    };
+
 
     useEffect(() => {
         getAllCollaborators().then((data) => {
             setUsers(data.data);
+            setFilteredUsers(data.data);
         });
     }, []);
+
+    function handleSearch(search) {
+        setUserSearch(search);
+        const filteredUsers = users.filter((user) => {
+            return (
+                user.firstname.toLowerCase().includes(search.toLowerCase()) ||
+                user.lastname.toLowerCase().includes(search.toLowerCase())
+            );
+        });
+        setFilteredUsers(filteredUsers);
+    }
 
     function calculateAge(age) {
         const birthdate = new Date(age);
@@ -30,9 +53,10 @@ function Users() {
     return (
         <>
             <h1>Users</h1>
+            <SearchBar search={userSearch} onChange={searchHandler} onSubmit={handleSearch}/>
             <div className="cards-container">
                 <div className="cards">
-                    {users.map((user, i) => (
+                    {filteredUsers.map((user, i) => (
                         <div className="card-body" key={i}>
                             <img src={user.photo}></img>
                             <div className="card-infos">

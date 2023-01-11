@@ -16,7 +16,7 @@
 
     /* background-color: rgb(109, 37, 191); */
     max-width: 500px;
-    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+    box-shadow: rgba(17, 12, 46, 0.15) 0 48px 100px 0;
 }
 
 img {
@@ -31,4 +31,14 @@ img {
 
 .infos-age {
     color: #888;
+}
+
+@media (max-width: 1060px) {
+    .cards {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(6, 1fr);
+        grid-column-gap: 0;
+        grid-row-gap: 30px;
+    }
 }

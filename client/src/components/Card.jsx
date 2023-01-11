@@ -4,7 +4,6 @@ import "./Card.css"
 
 
 function Card() {
-    const [post, setPost] = useState([]);
     const [randomPhoto, setRandomPhoto] = useState([]);
     const [randomFirstName, setRandomFirstName] = useState([]);
     const [randomLastName, setRandomLastName] = useState([]);
@@ -58,6 +57,7 @@ function Card() {
                 <h4>{randomFirstName}, {randomLastName} <span className="infos-age">({age}ans)</span></h4>
                 <p>{city}, {country}</p>
                 <a href={`mailto:${randomEmail}`}>📩{randomEmail}</a>
+                <br/>
                 <a href='${randomPhone}'>📞{randomPhone}</a>
                 <p>🎂Anniversaire : {birthdate}</p>
             </div>
