@@ -1,14 +1,12 @@
 function Card() {
 
 
-
-    
     return (
         <div className="card-body">
-            <img src="" alt="image du profil" />
-                <div className="card-infos">
-                    <p></p>
-                </div>
+            <img src="" alt="image du profil"/>
+            <div className="card-infos">
+                <p></p>
+            </div>
         </div>
     )
 

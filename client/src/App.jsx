@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import {useState} from 'react';
 import {Provider} from 'react-redux';
 import './App.css'
 import Login from "./components/Login";
-import Users from "./components/Users.jsx";
+import User from "./components/User.jsx";
 import store from './store/index.js';
+import Users from "./components/Users.jsx";
 
 
 function App() {
@@ -23,9 +24,11 @@ function App() {
         <Provider store={store}>
             <div className="App">
 
-                {/* Si accessToGame est à true alors on affiche le Canvas, sinon on laisse le formulaire de Login affiché.
-                {accessToGame ? <Users/>  : <Login checkIsLogged={verifyIsLogged}/>} */}
-                <Users/>
+                {/* Si accessToGame est à true alors on affiche le Canvas, sinon on laisse le formulaire de Login affiché.*/}
+                {/*                {accessToGame ? <User/> : <Login checkIsLogged={verifyIsLogged}/>}*/}
+
+                <User/>
+
             </div>
         </Provider>
     )

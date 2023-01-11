@@ -15,7 +15,7 @@ const router = express.Router();
 router.get('/random', getRandomCollaborateur);
 router.get('/', getCollaborateurs);
 router.get('/:id', getCollaborateur);
-// // Routes disponibles uniquement pour les admins
+// // routes disponibles uniquement pour les admins
 router.post('/', adminOnly, addCollaborateur);
 router.put('/:id', ownerOnly, updateCollaborateur);
 router.delete('/:id', adminOnly, deleteCollaborateur);

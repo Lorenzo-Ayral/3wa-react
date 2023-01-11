@@ -1,43 +1,46 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import {clearToken} from "../features/token.js";
+import React, {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {getAllCollaborators} from "../services/allCollaborator.js";
-import {getRandomCollaborator} from "../services/randomCollaborator.js";
+
 function Users() {
-    const [post, setPost] = useState([]);
+    const [users, setUsers] = useState([]);
 
-/*    useEffect(() => {
-        let token = localStorage.getItem('token');
-        axios.post("http://localhost:9000/api/collaborateurs", {
-            authorization: localStorage.getItem('token'),
-        })
-            .then(res => console.log(res))
-            .catch(err => console.log(err));
-    }, []);*/
+    useEffect(() => {
+        getAllCollaborators().then((data) => {
+            setUsers(data.data);
+        });
+    }, []);
 
-getRandomCollaborator().then(data=>{
+    function calculateAge(age) {
+        const birthdate = new Date(age);
+        const ageDifMs = Date.now() - birthdate.getTime();
+        const ageDate = new Date(ageDifMs);
+        return Math.abs(ageDate.getUTCFullYear() - 1970);
+    }
 
-    console.log(data.data.firstname);
-})
+    function formatDate(date) {
+        const options = {
+            day: "numeric",
+            month: "long",
+        };
+        const formatter = new Intl.DateTimeFormat("fr-FR", options);
+        return formatter.format(new Date(date));
+    }
 
-
-    const token = useSelector((state) => state.token);
     return (
         <div>
-            <button onClick={() => clearToken}/>
-            <pre>{JSON.stringify(token)}</pre>
-            Users
-            {post.map((item, i) => {
-                return (
-                    <div key={i}>
-                        <p>{getRandomCollaborator?.firstname}</p>
-                        <p>{item?.lastname}</p>
-                        <p>{item?.email}</p>
-                    </div>
-
-                );
-            })}
+            <h1>Users</h1>
+            {users.map((user, i) => (
+                <div key={i}>
+                    <img src={user.photo}></img>
+                    <p>{user.firstname}, {user.lastname}, ({calculateAge(user.birthdate)} ans)</p>
+                    <p>{user.city}</p>
+                    <a href={`mailto:${user.email}`}>{user.email}</a>
+                    <br/>
+                    <a href={`tel:${user.phone}`}>{user.phone}</a>
+                    <p>{formatDate(user.birthdate)}</p>
+                </div>
+            ))}
         </div>
     );
 }
