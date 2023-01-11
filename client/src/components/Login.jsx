@@ -63,6 +63,7 @@ const Login = ({checkIsLogged}) => {
             })
                 .then(res => {
                     localStorage.setItem("token", res.data.token);
+                    localStorage.setItem("userId", res.data.user.id);
                     dispatch(setToken(res.data.token));
                     setIsLogged(true);
                     checkIsLogged(true);

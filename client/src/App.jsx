@@ -6,6 +6,7 @@ import store from './store/index.js';
 import Users from "./components/Users.jsx";
 import {Route, BrowserRouter, NavLink, Routes, Navigate} from "react-router-dom";
 import Card from "./components/Card.jsx"
+import Profile from "./components/profile/Profile.jsx"
 
 /*import {Header} from "./components/header/Header.jsx";*/
 
@@ -34,12 +35,16 @@ function App() {
                             <li>
                                 <NavLink to={'/card'} as={Card}>Random</NavLink>
                             </li>
+                            <li>
+                                <NavLink to={'/profile'} as={Profile}>Profil</NavLink>
+                            </li>
                         </ul>
                         {/*  Routes qui permet de lister les routes disponibles/ */}
                         <Routes>
                             <Route path="card" element={<Card/>}/>
                             <Route path="users" element={<Users/>}/>
                             <Route path="login" element={<Login/>}/>
+                            <Route path="profile" element={<Profile/>}/>
                             {/*                            <Route path="*" element={<Navigate to="/login" />} />*/}
                         </Routes>
                     </BrowserRouter>
