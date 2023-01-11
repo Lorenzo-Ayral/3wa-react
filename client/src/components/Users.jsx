@@ -28,20 +28,27 @@ function Users() {
     }
 
     return (
-        <div>
+        <>
             <h1>Users</h1>
-            {users.map((user, i) => (
-                <div key={i}>
-                    <img src={user.photo}></img>
-                    <p>{user.firstname}, {user.lastname}, ({calculateAge(user.birthdate)} ans)</p>
-                    <p>{user.city}</p>
-                    <a href={`mailto:${user.email}`}>{user.email}</a>
-                    <br/>
-                    <a href={`tel:${user.phone}`}>{user.phone}</a>
-                    <p>{formatDate(user.birthdate)}</p>
+            <div className="cards-container">
+                <div className="cards">
+                    {users.map((user, i) => (
+                        <div className="card-body" key={i}>
+                            <img src={user.photo}></img>
+                            <div className="card-infos">
+                                <p>{user.firstname}, {user.lastname}, <span
+                                    className="infos-age">({calculateAge(user.birthdate)} ans)</span></p>
+                                <p>{user.city}, {user.country}</p>
+                                <a href={`mailto:${user.email}`}>📩 {user.email}</a>
+                                <br/>
+                                <a href={`tel:${user.phone}`}>📞 {user.phone}</a>
+                                <p>🎂 Anniversaire : {formatDate(user.birthdate)}</p>
+                            </div>
+                        </div>
+                    ))}
                 </div>
-            ))}
-        </div>
+            </div>
+        </>
     );
 }
 
