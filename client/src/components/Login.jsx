@@ -1,18 +1,18 @@
 import React, {useState} from 'react'
 import './Login.css';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { setToken } from '../features/token.jsx'
-import { useSelector} from "react-redux";
+import {useDispatch} from 'react-redux';
+import {setToken} from '../features/token.jsx'
+import {useSelector} from "react-redux";
 
-const Login = ( { checkIsLogged }) => {
+const Login = ({checkIsLogged}) => {
 
     const dispatch = useDispatch();
 
     // On créé un state pour le user
     const [user, setUser] = useState({
-        email:'',
-        password:'',
+        email: '',
+        password: '',
     })
 
     // On créé un tableau d'erreurs
@@ -20,7 +20,7 @@ const Login = ( { checkIsLogged }) => {
 
     // ON créé un booléen pour vérifier si l'utilisateur est connecté.
     const [isLogged, setIsLogged] = useState(false);
-    
+
     // On met à jour les données du state en copiant le state original et en mettant à jour les values en fonction des noms des labels.
     const handleInputChange = (event) => {
         const {value, name} = event.target
@@ -67,9 +67,7 @@ const Login = ( { checkIsLogged }) => {
                 })
                 .catch(err => console.log(err));
 
-        }
-        else
-        {
+        } else {
             // Sinon, on met à jour le tableau d'erreurs.
             setErrors(updateErrors);
         }
@@ -90,13 +88,13 @@ const Login = ( { checkIsLogged }) => {
                     <label htmlFor="password">Mot de passe:</label>
                     <input type="password" name="password" value={user.password} onChange={handleInputChange}/>
                 </div>
-                <input type="submit" value="Jouer" />
+                <input type="submit" value="Jouer"/>
             </form>
-                {/* On mappe le tableau d'erreur s'il y en a. */}
-                {errors.length > 0 ? 
-                    <div>
-                        { errors.map( (error, i) => <p key={i}>{ error }</p> ) }
-                    </div>
+            {/* On mappe le tableau d'erreur s'il y en a. */}
+            {errors.length > 0 ?
+                <div>
+                    {errors.map((error, i) => <p key={i}>{error}</p>)}
+                </div>
                 : null}
         </>
     )

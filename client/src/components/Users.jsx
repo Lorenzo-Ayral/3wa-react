@@ -1,29 +1,46 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import {clearToken} from "../features/token.js";
+import React, {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {getAllCollaborators} from "../services/allCollaborator.js";
-import {getRandomCollaborator} from "../services/randomCollaborator.js";
+
 function Users() {
-    const [post, setPost] = useState([]);
-    const [randomFirstname, setRandomFirstname] = useState([]);
+    const [users, setUsers] = useState([]);
 
-console.log(getRandomCollaborator())
-    useEffect(()=>{
-        getRandomCollaborator().then(data=>{
-            setRandomFirstname(data.data.firstname)
-        })
-    })
+    useEffect(() => {
+        getAllCollaborators().then((data) => {
+            setUsers(data.data);
+        });
+    }, []);
 
+    function calculateAge(age) {
+        const birthdate = new Date(age);
+        const ageDifMs = Date.now() - birthdate.getTime();
+        const ageDate = new Date(ageDifMs);
+        return Math.abs(ageDate.getUTCFullYear() - 1970);
+    }
 
+    function formatDate(date) {
+        const options = {
+            day: "numeric",
+            month: "long",
+        };
+        const formatter = new Intl.DateTimeFormat("fr-FR", options);
+        return formatter.format(new Date(date));
+    }
 
-    const token = useSelector((state) => state.token);
     return (
         <div>
-            <button onClick={() => clearToken}/>
-            <pre>{JSON.stringify(token)}</pre>
             <h1>Users</h1>
-            <p>{randomFirstname}</p>
+            {users.map((user, i) => (
+                <div key={i}>
+                    <img src={user.photo}></img>
+                    <p>{user.firstname}, {user.lastname}, ({calculateAge(user.birthdate)} ans)</p>
+                    <p>{user.city}</p>
+                    <a href={`mailto:${user.email}`}>{user.email}</a>
+                    <br/>
+                    <a href={`tel:${user.phone}`}>{user.phone}</a>
+                    <p>{formatDate(user.birthdate)}</p>
+                </div>
+            ))}
         </div>
     );
 }
