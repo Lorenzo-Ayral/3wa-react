@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from "react";
 import getRandomCollaborator from "../services/collaborateurManager.js";
 import "./Card.css"
-import calculateAge from "../services/CalculateAge.js";
-import {formatDate} from "../services/FormatDate.js";
+import {calculateAge, formatDate} from "../services/dateAge";
 
 
 function Card(props) {
