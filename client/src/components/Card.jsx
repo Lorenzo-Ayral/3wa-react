@@ -5,7 +5,11 @@ import calculateAge from "../services/CalculateAge.js";
 import {formatDate} from "../services/FormatDate.js";
 
 
-function Card() {
+function Card(props) {
+
+//   const randomUser = props.randomUser;
+
+
     const [randomPhoto, setRandomPhoto] = useState([]);
     const [randomFirstName, setRandomFirstName] = useState([]);
     const [randomLastName, setRandomLastName] = useState([]);
@@ -35,6 +39,7 @@ function Card() {
 
 
     return (
+
         <div className="card-body">
             <img src={randomPhoto} alt="image du profil"/>
             <div className="card-infos">
@@ -46,6 +51,8 @@ function Card() {
                 <p>🎂Anniversaire : {birthdate}</p>
             </div>
         </div>
+
+
     )
 
 }
