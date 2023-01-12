@@ -3,7 +3,7 @@ import {getCollaboratorById, updateCollaborator} from "../../services/collaborat
 import "./Profile.css";
 
 
-import {useNavigate, NavLink} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {selectUser} from "../../features/userStore";
 import {useSelector} from "react-redux";
 
