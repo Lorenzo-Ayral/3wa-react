@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {getCollaboratorById, updateCollaborator} from "../../services/collaborateurManager";
+import "./Profile.css";
 
 function Profile() {
     const [photo, setPhoto] = useState([]);
@@ -48,16 +49,18 @@ function Profile() {
 
     return(
         <>
-            <h1>Modifier mon profil</h1>
+            <h1 className="h1-profile">Modifier mon profil</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="firstName">First Name</label>
-                <input name={"firstname"} onChange={(e)=>setFirstName(e.target.value)} type="text" id="firstName" value={firstname}/>
+                <input name={"firstname"} onChange={(e) => setFirstName(e.target.value)} type="text" id="firstName"
+                       value={firstname}/>
                 <label htmlFor="lastName">Last Name</label>
-                <input name={"lastname"} onChange={(e)=>setLastName(e.target.value)} type="text" id="lastName" value={lastname}/>
+                <input name={"lastname"} onChange={(e) => setLastName(e.target.value)} type="text" id="lastName"
+                       value={lastname}/>
                 <label htmlFor="photo">Photo</label>
-                <input name={"photo"} onChange={(e)=>setPhoto(e.target.value)} type="text" id="photo" value={photo}/>
+                <input name={"photo"} onChange={(e) => setPhoto(e.target.value)} type="text" id="photo" value={photo}/>
                 <label htmlFor="city">City</label>
-                <input name={"city"} onChange={(e)=>setCity(e.target.value)} type="text" id="city" value={city}/>
+                <input name={"city"} onChange={(e) => setCity(e.target.value)} type="text" id="city" value={city}/>
                 <label htmlFor="email">Email</label>
                 <input name={"email"} onChange={(e)=>setEmail(e.target.value)} type="text" id="email" value={email}/>
                 <label htmlFor="phone">Phone</label>
@@ -66,10 +69,6 @@ function Profile() {
                 <input name={"birthdate"} onChange={(e)=>setBirthdate(e.target.value)} type="date" id="birthday" value={birthdate}/>
                 <label htmlFor="country">Pays</label>
                 <input name={"country"} onChange={(e)=>setCountry(e.target.value)} type="text" id="country" value={country}/>
-
-                <label htmlFor="country">Pays</label>
-                <input name={"country"} onChange={(e)=>setCountry(e.target.value)} type="text" id="country" value={country}/>
-
                 <label name={"gender"} htmlFor="gender">Civilité</label>
                 <select name="gender" onChange={(e) => setGender(e.target.value)} id="gender" value={gender}>
                     <option value="male">Male</option>
@@ -82,7 +81,7 @@ function Profile() {
                     <option value="Client">Client</option>
                 </select>
 
-                <button type="submit">Submit</button>
+                <button type="submit">Modifier</button>
             </form>
         </>
     )

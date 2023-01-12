@@ -1,0 +1,24 @@
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+}
+
+label {
+    margin-bottom: 10px;
+}
+
+input, select {
+    margin-bottom: 20px;
+}
+
+button {
+    margin-top: 20px;
+    background-color: #dc0303;
+}
+
+.h1-profile {
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.33);
+}

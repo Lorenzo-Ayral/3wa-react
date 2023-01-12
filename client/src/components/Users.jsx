@@ -23,17 +23,20 @@ function Users() {
         setFilteredUsers(searchResults);
     };
 
-    function handleSearch(search) {
+    function handleSearch({search, type}) {
         setUserSearch(search);
         const filteredUsers = users.filter((user) => {
-            return (
-                user.firstname.toLowerCase().includes(search.toLowerCase()) ||
-                user.lastname.toLowerCase().includes(search.toLowerCase())
-            );
+            if (type === "name") {
+                return (
+                    user.firstname.toLowerCase().includes(search.toLowerCase()) ||
+                    user.lastname.toLowerCase().includes(search.toLowerCase())
+                );
+            } else {
+                return user.city.toLowerCase().includes(search.toLowerCase());
+            }
         });
         setFilteredUsers(filteredUsers);
     }
-
 
     return (
         <>
