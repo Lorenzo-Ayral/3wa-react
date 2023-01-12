@@ -3,9 +3,9 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUser } from "../features/userStore";
-import getRandomCollaborator from "../services/apiManager";
+import getRandomCollaborator from "../services/collaborateurManager";
 
-// import ProfileCard from "../components/ProfileCard";
+import Card from "../components/Card";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -28,33 +28,33 @@ const Home = () => {
       });
   }, []);
 
-//   return (
-//     <div className="home">
-//       {user && (
-//         <button
-//           onClick={() => {
-//             getRandomCollaborator()
-//               .then((res) => {
-//                 console.log("RESPONSE OK ", res.data);
-//                 setRandomUser(res.data);
-//               })
-//               .catch((err) => {
-//                 console.log(err);
-//               });
-//           }}
-//         >
-//           random user
-//         </button>
-//       )}
+  return (
+    <div className="home">
+      {user && (
+        <button
+          onClick={() => {
+            getRandomCollaborator()
+              .then((res) => {
+                console.log("RESPONSE OK ", res.data);
+                setRandomUser(res.data);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }}
+        >
+          random user
+        </button>
+      )}
 
-//       {randomUser && <ProfileCard randomUser={randomUser} />}
-//     </div>
-//   );
+      {randomUser && <Card randomUser={randomUser} />}
+    </div>
+  );
 
 
-return(
-    <div>la home</div>
-)
+// return(
+//     <div>la home</div>
+// )
 
 };
 
