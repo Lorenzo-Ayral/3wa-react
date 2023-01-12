@@ -2,6 +2,11 @@ import {useEffect, useState} from "react";
 import {getCollaboratorById, updateCollaborator} from "../../services/collaborateurManager";
 import "./Profile.css";
 
+
+import {useNavigate, NavLink} from "react-router-dom";
+import {selectUser} from "../../features/userStore";
+import {useSelector} from "react-redux";
+
 function Profile() {
     const [photo, setPhoto] = useState([]);
     const [firstname, setFirstName] = useState([]);
@@ -14,7 +19,19 @@ function Profile() {
     const [gender, setGender] = useState("");
     const [service, setService] = useState("");
 
+
+    const navigate = useNavigate();
+
+
+    const {user} = useSelector(selectUser);
+
+
     useEffect(() => {
+
+        if (localStorage.getItem("user") === null) {
+            navigate("/login");
+        }
+
         getCollaboratorById().then(data => {
             setBirthdate(data.data.birthdate)
             setCity(data.data.city)

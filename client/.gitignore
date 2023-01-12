@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 .idea/
-server-json/node_modules
+node_modules

@@ -1,20 +1,33 @@
 import React, {useEffect, useState} from "react";
 import {getAllCollaborators} from "../services/collaborateurManager.js";
 import SearchBar from "./SearchBar.jsx";
-import calculateAge, {formatDate} from "../services/dateAge.js";
-import "./Users.css"
+import calculateAge from "../services/dateAge.js";
+import {useNavigate, NavLink} from "react-router-dom";
+import {selectUser} from "../features/userStore";
+import {useSelector} from "react-redux";
+
 
 function Users() {
     const [users, setUsers] = useState([]);
     const [userSearch, setUserSearch] = useState('');
     const [filteredUsers, setFilteredUsers] = useState(users);
 
+    const navigate = useNavigate();
+
+
+    const {user} = useSelector(selectUser);
+
+
     useEffect(() => {
+        if (localStorage.getItem("user") === null) {
+            navigate("/login");
+        }
         getAllCollaborators().then((data) => {
             setUsers(data.data);
             setFilteredUsers(data.data);
         });
     }, []);
+
     const searchHandler = e => {
         setUserSearch(e.target.value);
         const searchResults = users.filter(user =>
@@ -23,24 +36,27 @@ function Users() {
         setFilteredUsers(searchResults);
     };
 
-    function handleSearch({search, type}) {
+    function handleSearch(search) {
         setUserSearch(search);
         const filteredUsers = users.filter((user) => {
-            if (type === "name") {
-                return (
-                    user.firstname.toLowerCase().includes(search.toLowerCase()) ||
-                    user.lastname.toLowerCase().includes(search.toLowerCase())
-                );
-            } else {
-                return user.city.toLowerCase().includes(search.toLowerCase());
-            }
+            return (
+                user.firstname.toLowerCase().includes(search.toLowerCase()) ||
+                user.lastname.toLowerCase().includes(search.toLowerCase())
+            );
         });
         setFilteredUsers(filteredUsers);
     }
 
+    const formatedDate = (date) => {
+        const formatedDate = new Date(date);
+        const dateFormated = formatedDate.toLocaleString();
+
+        return dateFormated;
+    };
+
     return (
         <>
-            <h1 className="h1-list">Liste des collaborateurs</h1>
+            <h1>Users</h1>
             <SearchBar search={userSearch} onChange={searchHandler} onSubmit={handleSearch}/>
             <div className="cards-container">
                 <div className="cards">
@@ -54,8 +70,7 @@ function Users() {
                                 <a href={`mailto:${user.email}`}>📩 {user.email}</a>
                                 <br/>
                                 <a href={`tel:${user.phone}`}>📞 {user.phone}</a>
-                                <p>🎂 Anniversaire : {formatDate(user.birthdate)}</p>
-                                <p>Service : {user.service}</p>
+                                <p>🎂 Anniversaire : {formatedDate(user.birthdate)}</p>
                             </div>
                         </div>
                     ))}
