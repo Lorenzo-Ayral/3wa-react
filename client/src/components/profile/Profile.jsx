@@ -38,21 +38,21 @@ function Profile() {
             <h1>Modifier mon profil</h1>
             <form>
                 <label htmlFor="firstName">First Name</label>
-                <input type="text" id="firstName" placeholder={firstName}/>
+                <input type="text" id="firstName" value={firstName}/>
                 <label htmlFor="lastName">Last Name</label>
-                <input type="text" id="lastName" placeholder={lastName}/>
+                <input type="text" id="lastName" value={lastName}/>
                 <label htmlFor="photo">Photo</label>
-                <input type="text" id="photo" placeholder={photo}/>
+                <input type="text" id="photo" value={photo}/>
                 <label htmlFor="city">City</label>
-                <input type="text" id="city" placeholder={city}/>
+                <input type="text" id="city" value={city}/>
                 <label htmlFor="email">Email</label>
-                <input type="text" id="email" placeholder={email}/>
+                <input type="text" id="email" value={email}/>
                 <label htmlFor="phone">Phone</label>
-                <input type="text" id="phone" placeholder={phone}/>
+                <input type="text" id="phone" value={phone}/>
                 <label htmlFor="birthday">Date de naissance</label>
-                <input type="text" id="birthday" placeholder={birthdate}/>
+                <input type="text" id="birthday" value={birthdate}/>
                 <label htmlFor="country">Pays</label>
-                <input type="text" id="country" placeholder={country}/>
+                <input type="text" id="country" value={country}/>
 
                 <button type="submit">Submit</button>
             </form>
