@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {getAllCollaborators} from "../services/collaborateurManager.js";
 import SearchBar from "./SearchBar.jsx";
-import {formatDate} from "../services/FormatDate.js";
-import calculateAge from "../services/CalculateAge.js";
+import calculateAge, {formatDate} from "../services/dateAge.js";
+import "./Users.css"
 
 function Users() {
     const [users, setUsers] = useState([]);
@@ -34,14 +34,15 @@ function Users() {
         setFilteredUsers(filteredUsers);
     }
 
+
     return (
         <>
-            <h1>Users</h1>
+            <h1 className="h1-list">Liste des collaborateurs</h1>
             <SearchBar search={userSearch} onChange={searchHandler} onSubmit={handleSearch}/>
             <div className="cards-container">
                 <div className="cards">
                     {filteredUsers.map((user, i) => (
-                        <div className="card-body" key={i}>
+                        <div className="card-body" key={user.id}>
                             <img src={user.photo}></img>
                             <div className="card-infos">
                                 <p>{user.firstname}, {user.lastname}, <span
@@ -51,6 +52,7 @@ function Users() {
                                 <br/>
                                 <a href={`tel:${user.phone}`}>📞 {user.phone}</a>
                                 <p>🎂 Anniversaire : {formatDate(user.birthdate)}</p>
+                                <p>Service : {user.service}</p>
                             </div>
                         </div>
                     ))}

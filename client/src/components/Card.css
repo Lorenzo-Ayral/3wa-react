@@ -1,6 +1,13 @@
 .cards-container {
     display: flex;
     justify-content: center;
+    margin-top: 50px;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    margin: 50px 0;
 }
 
 .cards {
@@ -13,15 +20,11 @@
 
 .card-body {
     display: flex;
-
-    /* background-color: rgb(109, 37, 191); */
-    max-width: 500px;
+    width: 600px;
     box-shadow: rgba(17, 12, 46, 0.15) 0 48px 100px 0;
 }
 
 img {
-    width: 200px;
-    height: 200px;
     padding-right: 50px;
 }
 

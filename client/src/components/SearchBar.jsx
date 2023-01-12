@@ -5,9 +5,7 @@ const SearchBar = ({search, onChange, onSubmit}) => {
     }
     return (
         <form onSubmit={handleSearch}>
-            <label htmlFor="search">Search :</label>
-            <input type="text" value={search} onChange={onChange}/>
-            <button type="submit">Go Search</button>
+            <input type="text" value={search} onChange={onChange} placeholder="Brigitte Macron"/>
         </form>
     )
 }
