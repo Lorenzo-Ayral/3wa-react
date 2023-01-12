@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from "react";
-import {getRandomCollaborator} from "../services/randomCollaborator.js";
+import getRandomCollaborator from "../services/collaborateurManager.js";
 import "./Card.css"
+import calculateAge from "../services/CalculateAge.js";
+import {formatDate} from "../services/FormatDate.js";
 
 
 function Card() {
-    const [post, setPost] = useState([]);
     const [randomPhoto, setRandomPhoto] = useState([]);
     const [randomFirstName, setRandomFirstName] = useState([]);
     const [randomLastName, setRandomLastName] = useState([]);
@@ -16,24 +17,6 @@ function Card() {
     const [country, setCountry] = useState("");
     const [service, setService] = useState("");
 
-
-    function calculateAge(age) {
-        const birthdate = new Date(age);
-        const ageDifMs = Date.now() - birthdate.getTime();
-        const ageDate = new Date(ageDifMs);
-        return Math.abs(ageDate.getUTCFullYear() - 1970);
-    }
-
-    function formatDate(date) {
-        const options = {
-            day: 'numeric',
-            month: 'long'
-        };
-        const formatter = new Intl.DateTimeFormat('fr-FR', options);
-        return formatter.format(new Date(date));
-    }
-
-    console.log(getRandomCollaborator())
 
     useEffect(() => {
         getRandomCollaborator().then(data => {
@@ -58,6 +41,7 @@ function Card() {
                 <h4>{randomFirstName}, {randomLastName} <span className="infos-age">({age}ans)</span></h4>
                 <p>{city}, {country}</p>
                 <a href={`mailto:${randomEmail}`}>📩{randomEmail}</a>
+                <br/>
                 <a href='${randomPhone}'>📞{randomPhone}</a>
                 <p>🎂Anniversaire : {birthdate}</p>
             </div>

@@ -33,26 +33,36 @@ function Profile() {
         return formatter.format(new Date(date));
     }
 
+    function handleSubmit(e) {
+        e.preventDefault();
+        const data = {
+            firstName,
+            lastName,
+            email,
+        }
+        console.log(data)
+    }
+
     return(
         <>
             <h1>Modifier mon profil</h1>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <label htmlFor="firstName">First Name</label>
-                <input type="text" id="firstName" value={firstName}/>
+                <input onChange={(e)=>setFirstName(e.target.value)} type="text" id="firstName" value={firstName}/>
                 <label htmlFor="lastName">Last Name</label>
-                <input type="text" id="lastName" value={lastName}/>
+                <input onChange={(e)=>setLastName(e.target.value)} type="text" id="lastName" value={lastName}/>
                 <label htmlFor="photo">Photo</label>
-                <input type="text" id="photo" value={photo}/>
+                <input onChange={(e)=>setPhoto(e.target.value)} type="text" id="photo" value={photo}/>
                 <label htmlFor="city">City</label>
-                <input type="text" id="city" value={city}/>
+                <input onChange={(e)=>setCity(e.target.value)} type="text" id="city" value={city}/>
                 <label htmlFor="email">Email</label>
-                <input type="text" id="email" value={email}/>
+                <input onChange={(e)=>setEmail(e.target.value)} type="text" id="email" value={email}/>
                 <label htmlFor="phone">Phone</label>
-                <input type="text" id="phone" value={phone}/>
+                <input onChange={(e)=>setPhone(e.target.value)} type="text" id="phone" value={phone}/>
                 <label htmlFor="birthday">Date de naissance</label>
-                <input type="text" id="birthday" value={birthdate}/>
+                <input onChange={(e)=>setBirthdate(e.target.value)} type="text" id="birthday" value={birthdate}/>
                 <label htmlFor="country">Pays</label>
-                <input type="text" id="country" value={country}/>
+                <input onChange={(e)=>setCountry(e.target.value)} type="text" id="country" value={country}/>
 
                 <button type="submit">Submit</button>
             </form>

@@ -1,38 +1,46 @@
 import React, {useEffect, useState} from "react";
-import {useSelector} from "react-redux";
-import {getAllCollaborators} from "../services/allCollaborator.js";
+import {getAllCollaborators} from "../services/collaborateurManager.js";
+import SearchBar from "./SearchBar.jsx";
+import {formatDate} from "../services/FormatDate.js";
+import calculateAge from "../services/CalculateAge.js";
 
 function Users() {
     const [users, setUsers] = useState([]);
+    const [userSearch, setUserSearch] = useState('');
+    const [filteredUsers, setFilteredUsers] = useState(users);
 
     useEffect(() => {
         getAllCollaborators().then((data) => {
             setUsers(data.data);
+            setFilteredUsers(data.data);
         });
     }, []);
+    const searchHandler = e => {
+        setUserSearch(e.target.value);
+        const searchResults = users.filter(user =>
+            user.firstname.toLowerCase().includes(e.target.value.toLowerCase())
+        );
+        setFilteredUsers(searchResults);
+    };
 
-    function calculateAge(age) {
-        const birthdate = new Date(age);
-        const ageDifMs = Date.now() - birthdate.getTime();
-        const ageDate = new Date(ageDifMs);
-        return Math.abs(ageDate.getUTCFullYear() - 1970);
-    }
-
-    function formatDate(date) {
-        const options = {
-            day: "numeric",
-            month: "long",
-        };
-        const formatter = new Intl.DateTimeFormat("fr-FR", options);
-        return formatter.format(new Date(date));
+    function handleSearch(search) {
+        setUserSearch(search);
+        const filteredUsers = users.filter((user) => {
+            return (
+                user.firstname.toLowerCase().includes(search.toLowerCase()) ||
+                user.lastname.toLowerCase().includes(search.toLowerCase())
+            );
+        });
+        setFilteredUsers(filteredUsers);
     }
 
     return (
         <>
             <h1>Users</h1>
+            <SearchBar search={userSearch} onChange={searchHandler} onSubmit={handleSearch}/>
             <div className="cards-container">
                 <div className="cards">
-                    {users.map((user, i) => (
+                    {filteredUsers.map((user, i) => (
                         <div className="card-body" key={i}>
                             <img src={user.photo}></img>
                             <div className="card-infos">
