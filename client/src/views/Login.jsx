@@ -11,7 +11,6 @@ const Login = () => {
     const [password, setPassword] = useState("");
 
     const dispatch = useDispatch();
-    // a commnteter
     const {user} = useSelector(selectUser);
     const navigate = useNavigate();
 

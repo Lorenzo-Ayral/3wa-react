@@ -15,6 +15,13 @@ const Home = () => {
     const {user} = useSelector(selectUser);
 
     useEffect(() => {
+        if (randomUser) {
+            console.log("randomUser changed", randomUser);
+        }
+    }, [randomUser]);
+
+
+    useEffect(() => {
         if (localStorage.getItem("user") === null) {
             navigate("/login");
         }
@@ -28,8 +35,13 @@ const Home = () => {
             });
     }, []);
 
+
     return (
         <div className="home">
+            <h1>Bienvenue sur l'Intranet</h1>
+            <h2>La plateforme de l'entreprise qui permet de dire bonjour à ses collaborateurs</h2>
+            <p>Avez-vous dit bonjour à :</p>
+            {randomUser && <Card randomUser={randomUser}/>}
             {user && (
                 <button
                     onClick={() => {
@@ -43,19 +55,12 @@ const Home = () => {
                             });
                     }}
                 >
-                    random user
+                    Dire bonjour à quelqu'un d'autre
                 </button>
             )}
 
-            {randomUser && <Card randomUser={randomUser}/>}
         </div>
     );
-
-
-// return(
-//     <div>la home</div>
-// )
-
 };
 
 export default Home;

@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {getAllCollaborators} from "../services/collaborateurManager.js";
 import SearchBar from "./SearchBar.jsx";
-import calculateAge from "../services/dateAge.js";
+import calculateAge, {formatDate} from "../services/dateAge.js";
+import "./Users.css"
 
 function Users() {
     const [users, setUsers] = useState([]);
@@ -33,16 +34,10 @@ function Users() {
         setFilteredUsers(filteredUsers);
     }
 
-    const formatedDate = (date)=>{
-        const formatedDate = new Date(date);
-        const dateFormated = formatedDate.toLocaleString();
-
-        return dateFormated;
-    };
 
     return (
         <>
-            <h1>Users</h1>
+            <h1 className="h1-list">Liste des collaborateurs</h1>
             <SearchBar search={userSearch} onChange={searchHandler} onSubmit={handleSearch}/>
             <div className="cards-container">
                 <div className="cards">
@@ -56,7 +51,8 @@ function Users() {
                                 <a href={`mailto:${user.email}`}>📩 {user.email}</a>
                                 <br/>
                                 <a href={`tel:${user.phone}`}>📞 {user.phone}</a>
-                                <p>🎂 Anniversaire : {formatedDate(user.birthdate)}</p>
+                                <p>🎂 Anniversaire : {formatDate(user.birthdate)}</p>
+                                <p>Service : {user.service}</p>
                             </div>
                         </div>
                     ))}
