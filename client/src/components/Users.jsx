@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {getAllCollaborators} from "../services/allCollaborator.js";
+import {getAllCollaborators} from "../services/collaborateurManager.js";
 import SearchBar from "./SearchBar.jsx";
 import {formatDate} from "../services/FormatDate.js";
 import calculateAge from "../services/CalculateAge.js";
