@@ -1,20 +1,13 @@
 import React, {useEffect, useState} from "react";
 import {getAllCollaborators} from "../services/allCollaborator.js";
 import SearchBar from "./SearchBar.jsx";
+import {formatDate} from "../services/FormatDate.js";
+import calculateAge from "../services/CalculateAge.js";
 
 function Users() {
     const [users, setUsers] = useState([]);
     const [userSearch, setUserSearch] = useState('');
     const [filteredUsers, setFilteredUsers] = useState(users);
-
-    const searchHandler = e => {
-        setUserSearch(e.target.value);
-        const searchResults = users.filter(user =>
-            user.firstname.toLowerCase().includes(e.target.value.toLowerCase())
-        );
-        setFilteredUsers(searchResults);
-    };
-
 
     useEffect(() => {
         getAllCollaborators().then((data) => {
@@ -22,6 +15,13 @@ function Users() {
             setFilteredUsers(data.data);
         });
     }, []);
+    const searchHandler = e => {
+        setUserSearch(e.target.value);
+        const searchResults = users.filter(user =>
+            user.firstname.toLowerCase().includes(e.target.value.toLowerCase())
+        );
+        setFilteredUsers(searchResults);
+    };
 
     function handleSearch(search) {
         setUserSearch(search);
@@ -32,22 +32,6 @@ function Users() {
             );
         });
         setFilteredUsers(filteredUsers);
-    }
-
-    function calculateAge(age) {
-        const birthdate = new Date(age);
-        const ageDifMs = Date.now() - birthdate.getTime();
-        const ageDate = new Date(ageDifMs);
-        return Math.abs(ageDate.getUTCFullYear() - 1970);
-    }
-
-    function formatDate(date) {
-        const options = {
-            day: "numeric",
-            month: "long",
-        };
-        const formatter = new Intl.DateTimeFormat("fr-FR", options);
-        return formatter.format(new Date(date));
     }
 
     return (
