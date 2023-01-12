@@ -34,6 +34,13 @@ function Users() {
         setFilteredUsers(filteredUsers);
     }
 
+    const formatedDate = (date)=>{
+        const formatedDate = new Date(date);
+        const dateFormated = formatedDate.toLocaleString();
+
+        return dateFormated;
+    };
+
     return (
         <>
             <h1>Users</h1>
@@ -41,7 +48,7 @@ function Users() {
             <div className="cards-container">
                 <div className="cards">
                     {filteredUsers.map((user, i) => (
-                        <div className="card-body" key={i}>
+                        <div className="card-body" key={user.id}>
                             <img src={user.photo}></img>
                             <div className="card-infos">
                                 <p>{user.firstname}, {user.lastname}, <span
@@ -50,7 +57,7 @@ function Users() {
                                 <a href={`mailto:${user.email}`}>📩 {user.email}</a>
                                 <br/>
                                 <a href={`tel:${user.phone}`}>📞 {user.phone}</a>
-                                <p>🎂 Anniversaire : {formatDate(user.birthdate)}</p>
+                                <p>🎂 Anniversaire : {formatedDate(user.birthdate)}</p>
                             </div>
                         </div>
                     ))}
