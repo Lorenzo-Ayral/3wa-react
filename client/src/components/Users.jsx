@@ -2,18 +2,33 @@ import React, {useEffect, useState} from "react";
 import {getAllCollaborators} from "../services/collaborateurManager.js";
 import SearchBar from "./SearchBar.jsx";
 import calculateAge from "../services/dateAge.js";
+import {useNavigate , NavLink} from "react-router-dom";
+import {selectUser} from "../features/userStore";
+import {useSelector} from "react-redux";
+
+
 
 function Users() {
     const [users, setUsers] = useState([]);
     const [userSearch, setUserSearch] = useState('');
     const [filteredUsers, setFilteredUsers] = useState(users);
 
+    const navigate = useNavigate();
+
+
+    const {user} = useSelector(selectUser);
+
+
     useEffect(() => {
+        if (localStorage.getItem("user") === null) {
+            navigate("/login");
+        }
         getAllCollaborators().then((data) => {
             setUsers(data.data);
             setFilteredUsers(data.data);
         });
     }, []);
+
     const searchHandler = e => {
         setUserSearch(e.target.value);
         const searchResults = users.filter(user =>
