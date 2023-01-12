@@ -1,6 +1,5 @@
 import {useEffect, useState} from "react";
-import {getCollaboratorById} from "../../services/getCollaboratorById.js";
-import {updateCollaborator} from "../../services/updateCollaborateur.js";
+import {getCollaboratorById, updateCollaborator} from "../../services/collaborateurManager";
 
 function Profile() {
     const [photo, setPhoto] = useState([]);

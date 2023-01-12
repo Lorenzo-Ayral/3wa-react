@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {getAllCollaborators} from "../services/collaborateurManager.js";
 import SearchBar from "./SearchBar.jsx";
-import {formatDate} from "../services/FormatDate.js";
-import calculateAge from "../services/CalculateAge.js";
+import calculateAge from "../services/dateAge.js";
 
 function Users() {
     const [users, setUsers] = useState([]);
