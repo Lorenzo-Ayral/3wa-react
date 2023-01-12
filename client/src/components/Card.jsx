@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {getRandomCollaborator} from "../services/randomCollaborator.js";
+import getRandomCollaborator from "../services/collaborateurManager.js";
 import "./Card.css"
 import calculateAge from "../services/CalculateAge.js";
 import {formatDate} from "../services/FormatDate.js";
