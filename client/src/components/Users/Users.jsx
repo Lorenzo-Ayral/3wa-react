@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from "react";
-import {getAllCollaborators} from "../services/collaborateurManager.js";
-import SearchBar from "./SearchBar.jsx";
-import calculateAge from "../services/dateAge.js";
-import {useNavigate, NavLink} from "react-router-dom";
-import {selectUser} from "../features/userStore";
+import {getAllCollaborators} from "../../services/collaborateurManager.js";
+import SearchBar from "../SearchBar.jsx";
+import calculateAge, {formatDate} from "../../services/dateAge.js";
+import {useNavigate} from "react-router-dom";
+import {selectUser} from "../../features/userStore.jsx";
 import {useSelector} from "react-redux";
+import "./Users.css";
 
 
 function Users() {
@@ -47,16 +48,9 @@ function Users() {
         setFilteredUsers(filteredUsers);
     }
 
-    const formatedDate = (date) => {
-        const formatedDate = new Date(date);
-        const dateFormated = formatedDate.toLocaleString();
-
-        return dateFormated;
-    };
-
     return (
         <>
-            <h1>Users</h1>
+            <h1 className="h1-list">Liste des collaborateurs</h1>
             <SearchBar search={userSearch} onChange={searchHandler} onSubmit={handleSearch}/>
             <div className="cards-container">
                 <div className="cards">
@@ -70,7 +64,8 @@ function Users() {
                                 <a href={`mailto:${user.email}`}>📩 {user.email}</a>
                                 <br/>
                                 <a href={`tel:${user.phone}`}>📞 {user.phone}</a>
-                                <p>🎂 Anniversaire : {formatedDate(user.birthdate)}</p>
+                                <p>🎂 Anniversaire : {formatDate(user.birthdate)}</p>
+                                <p>Service : {user.service}</p>
                             </div>
                         </div>
                     ))}

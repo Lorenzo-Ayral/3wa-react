@@ -1,14 +1,11 @@
 import {NavLink} from "react-router-dom";
-import Card from "../Card.jsx";
-import Users from "../Users.jsx";
-import Profile from "../profile/Profile.jsx";
-import "./Header.css"
+import Card from "../Card/Card.jsx";
+import Users from "../Users/Users.jsx";
+import Profile from "../Profile/Profile.jsx";
 import LogoutButton from "../../services/deconnection.jsx";
-import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
-
 import {selectUser} from "../../features/userStore.jsx";
-import {setUser} from "../../features/userStore.jsx";
+import "./Header.css"
 
 function Header() {
 
@@ -30,7 +27,7 @@ function Header() {
                         </li>
 
                         <li>
-                            <NavLink className="lo" to={'/profile'} as={Profile}>Profil</NavLink>
+                            <NavLink className="lo" to={'/Profile'} as={Profile}>Profil</NavLink>
                         </li>
 
                         <li>

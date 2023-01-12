@@ -1,12 +1,11 @@
-import {useState, useEffect} from 'react';
 import './App.css'
 import {Routes, Route, Navigate} from "react-router-dom";
 
 import Login from './views/Login';
 import Home from './views/Home';
 import Header from './components/Header/Header';
-import Users from "./components/Users.jsx";
-import Profile from "./components/profile/Profile.jsx"
+import Users from "./components/Users/Users.jsx";
+import Profile from "./components/Profile/Profile.jsx"
 
 
 function App() {

@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from "react";
 
-import {useNavigate, NavLink} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {selectUser} from "../features/userStore";
 import getRandomCollaborator from "../services/collaborateurManager";
 
-import Card from "../components/Card";
+import Card from "../components/Card/Card.jsx";
 
 const Home = () => {
     const navigate = useNavigate();
@@ -30,9 +30,27 @@ const Home = () => {
 
     return (
         <div className="home">
-            <NavLink to={'/card'} as={Card}>Chercher un nouveau collaborateur</NavLink>
-
+            <h1>Bienvenue sur l'Intranet</h1>
+            <h2>La plateforme de l'entreprise qui permet de dire bonjour à ses collaborateurs</h2>
+            <p>Avez-vous dit bonjour à :</p>
             {randomUser && <Card randomUser={randomUser}/>}
+            {user && (
+                <button
+                    onClick={() => {
+                        getRandomCollaborator()
+                            .then((res) => {
+                                console.log("RESPONSE OK ", res.data);
+                                setRandomUser(res.data);
+                            })
+                            .catch((err) => {
+                                console.log(err);
+                            });
+                    }}
+                >
+                    Dire bonjour à quelqu'un d'autre
+                </button>
+            )}
+
         </div>
     );
 

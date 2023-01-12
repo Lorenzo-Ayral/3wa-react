@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from "react";
-import getRandomCollaborator from "../services/collaborateurManager.js";
+import React from "react";
 import "./Card.css"
-import {calculateAge, formatDate} from "../services/dateAge";
+import {calculateAge, formatDate} from "../../services/dateAge.js";
 
 
 const Card = ({randomUser}) => {
