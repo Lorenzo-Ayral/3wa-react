@@ -5,18 +5,27 @@ import calculateAge, {formatDate} from "../../services/dateAge.js";
 import {useNavigate} from "react-router-dom";
 import {selectUser} from "../../features/userStore.jsx";
 import {useSelector} from "react-redux";
-import "./Users.css";
-
+import {CSSTransition} from 'react-transition-group';
+import './Users.css';
 
 function Users() {
     const [users, setUsers] = useState([]);
     const [userSearch, setUserSearch] = useState('');
     const [filteredUsers, setFilteredUsers] = useState(users);
+    const [cardIsVisible, setCardIsVisible] = useState(false);
+
 
     const navigate = useNavigate();
 
 
     const {user} = useSelector(selectUser);
+
+    useEffect(() => {
+        setCardIsVisible(false);
+        setTimeout(() => {
+            setCardIsVisible(true);
+        }, 300);
+    }, [filteredUsers]);
 
 
     useEffect(() => {
@@ -55,19 +64,23 @@ function Users() {
             <div className="cards-container">
                 <div className="cards">
                     {filteredUsers.map((user, i) => (
-                        <div className="card-body" key={user.id}>
-                            <img src={user.photo}></img>
-                            <div className="card-infos">
-                                <p>{user.firstname}, {user.lastname}, <span
-                                    className="infos-age">({calculateAge(user.birthdate)} ans)</span></p>
-                                <p>{user.city}, {user.country}</p>
-                                <a href={`mailto:${user.email}`}>📩 {user.email}</a>
-                                <br/>
-                                <a href={`tel:${user.phone}`}>📞 {user.phone}</a>
-                                <p>🎂 Anniversaire : {formatDate(user.birthdate)}</p>
-                                <p>Service : {user.service}</p>
+                        <CSSTransition key={user.id} timeout={300} classNames="fade" in={cardIsVisible} unmountOnExit>
+                            <div className={`card-body ${cardIsVisible ? "fade-in" : ""}`}>
+                                <img src={user.photo}></img>
+                                <div className="card-infos">
+                                    <p>
+                                        {user.firstname}, {user.lastname}, <span
+                                        className="infos-age">({calculateAge(user.birthdate)} ans)</span>
+                                    </p>
+                                    <p>{user.city}, {user.country}</p>
+                                    <a href={`mailto:${user.email}`}>📩 {user.email}</a>
+                                    <br/>
+                                    <a href={`tel:${user.phone}`}>📞 {user.phone}</a>
+                                    <p>🎂 Anniversaire : {formatDate(user.birthdate)}</p>
+                                    <p>Service : {user.service}</p>
+                                </div>
                             </div>
-                        </div>
+                        </CSSTransition>
                     ))}
                 </div>
             </div>
