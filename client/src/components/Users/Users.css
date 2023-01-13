@@ -1,4 +1,17 @@
-.h1-list {
-    padding-bottom: 20px;
-    border-bottom: 1px solid rgba(128, 128, 128, 0.33);
+.fade-enter {
+    opacity: 0;
+}
+
+.fade-enter-active {
+    opacity: 1;
+    transition: opacity 300ms;
+}
+
+.fade-exit {
+    opacity: 1;
+}
+
+.fade-exit-active {
+    opacity: 0;
+    transition: opacity 300ms;
 }

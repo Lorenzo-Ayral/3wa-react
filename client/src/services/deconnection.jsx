@@ -2,6 +2,7 @@ function LogoutButton() {
     const handleLogout = () => {
         // Delete user's auth token
         localStorage.removeItem("user");
+        localStorage.removeItem("token");
         // Redirect user to login page
         window.location.href = "/";
     };
