@@ -25,7 +25,9 @@
 }
 
 img {
-    padding-right: 50px;
+    height: 250px;
+    margin-right: 50px;
+    width: 250px;
 }
 
 .card-infos {
