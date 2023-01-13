@@ -38,7 +38,6 @@ img {
 
 @media (max-width: 1060px) {
     .cards {
-        display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: repeat(6, 1fr);
         grid-column-gap: 0;
